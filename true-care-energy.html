@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>True Care Energy – Clean Energy for Every Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-deep:   #0d3d2e;
+      --green-mid:    #1a6648;
+      --green-fresh:  #2dbd7e;
+      --green-light:  #b6f0d6;
+      --cream:        #f5f0e8;
+      --sand:         #e8e0d0;
+      --charcoal:     #1c1c1c;
+      --white:        #ffffff;
+      --radius:       14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(245,240,232,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(13,61,46,0.1);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: var(--green-deep);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-icon svg { width: 20px; height: 20px; }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--green-deep);
+      line-height: 1.1;
+    }
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.65rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+    }
+    .nav-cta {
+      background: var(--green-deep);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* ── HERO ───────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 5% 4rem;
+      gap: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(45,189,126,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -15%; left: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(13,61,46,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green-light);
+      color: var(--green-deep);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s ease forwards;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-fresh);
+      border-radius: 50%;
+      display: block;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--green-deep);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.35s ease forwards;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--green-fresh);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #4a5a52;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.65s ease forwards;
+    }
+    .btn-primary {
+      background: var(--green-deep);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--green-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13,61,46,0.25);
+    }
+    .btn-secondary {
+      color: var(--green-deep);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1.5px solid var(--green-fresh);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--green-fresh); }
+
+    /* Hero graphic */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 0.9s 0.5s ease forwards;
+    }
+    .hero-circle {
+      width: min(420px, 90%);
+      aspect-ratio: 1;
+      background: linear-gradient(145deg, var(--green-mid), var(--green-deep));
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(13,61,46,0.3);
+    }
+    .hero-circle-inner {
+      width: 75%;
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-sun-svg { width: 55%; color: var(--green-light); }
+
+    .hero-chip {
+      position: absolute;
+      background: var(--white);
+      border-radius: 50px;
+      padding: 0.65rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--green-deep);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      white-space: nowrap;
+    }
+    .hero-chip-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .chip-1 { bottom: 14%; left: -4%; animation: float 4s ease-in-out infinite; }
+    .chip-2 { top: 16%; right: -6%; animation: float 4s 1.3s ease-in-out infinite; }
+    .chip-3 { top: 50%; left: -10%; animation: float 4s 0.6s ease-in-out infinite; }
+
+    /* ── STATS STRIP ────────────────────────── */
+    .stats {
+      background: var(--green-deep);
+      padding: 2.5rem 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat {
+      text-align: center;
+      color: var(--white);
+      padding: 1rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--green-fresh);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label { font-size: 0.82rem; opacity: 0.7; letter-spacing: 0.04em; }
+
+    /* ── SERVICES ───────────────────────────── */
+    .services {
+      padding: 6rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-fresh);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 3.5rem;
+      max-width: 500px;
+      line-height: 1.15;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid rgba(13,61,46,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(13,61,46,0.12);
+    }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--green-light);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.3rem;
+    }
+    .service-icon svg { width: 26px; height: 26px; color: var(--green-deep); }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.6rem;
+    }
+    .service-desc { font-size: 0.88rem; color: #5a6a62; line-height: 1.65; }
+
+    /* ── FORM SECTION ───────────────────────── */
+    .contact-section {
+      background: var(--green-deep);
+      padding: 6rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -8%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(45,189,126,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info .section-eyebrow { color: var(--green-fresh); }
+    .contact-info .section-title {
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .contact-info p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+    .trust-icon {
+      width: 36px; height: 36px;
+      background: rgba(45,189,126,0.15);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 18px; height: 18px; color: var(--green-fresh); }
+    .trust-text { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .trust-text strong { color: var(--white); display: block; margin-bottom: 0.15rem; }
+
+    /* Form */
+    .form-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 2.8rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    }
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.4rem;
+    }
+    .form-sub {
+      font-size: 0.87rem;
+      color: #5a6a62;
+      margin-bottom: 2rem;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      margin-bottom: 0.45rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--white);
+      border: 1.5px solid rgba(13,61,46,0.15);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--charcoal);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus {
+      border-color: var(--green-fresh);
+      box-shadow: 0 0 0 3px rgba(45,189,126,0.12);
+    }
+
+    /* Products checkboxes */
+    .products-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--white);
+      border: 1.5px solid rgba(13,61,46,0.12);
+      border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .checkbox-item:hover { border-color: var(--green-fresh); background: rgba(45,189,126,0.05); }
+    .checkbox-item input[type="checkbox"] { display: none; }
+    .checkbox-item.checked {
+      border-color: var(--green-fresh);
+      background: rgba(45,189,126,0.08);
+    }
+    .checkbox-box {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(13,61,46,0.25);
+      border-radius: 5px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .checkbox-item.checked .checkbox-box {
+      background: var(--green-fresh);
+      border-color: var(--green-fresh);
+    }
+    .checkbox-box svg { display: none; width: 10px; height: 10px; color: white; }
+    .checkbox-item.checked .checkbox-box svg { display: block; }
+    .checkbox-label { font-size: 0.84rem; color: var(--charcoal); }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 1.8rem;
+      padding: 1rem;
+      background: var(--green-deep);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .form-submit:hover {
+      background: var(--green-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13,61,46,0.3);
+    }
+    .form-privacy {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #7a8a82;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Success */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .form-success.visible { display: block; }
+    .success-icon {
+      width: 64px; height: 64px;
+      background: var(--green-light);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1.2rem;
+    }
+    .success-icon svg { width: 32px; height: 32px; color: var(--green-deep); }
+    .form-success h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--green-deep);
+      margin-bottom: 0.5rem;
+    }
+    .form-success p { font-size: 0.9rem; color: #5a6a62; }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer {
+      background: #080f0b;
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-fresh);
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--green-fresh); }
+
+    /* ── KEYFRAMES ──────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 8rem; }
+      .hero-sub { margin: 0 auto 2.5rem; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { order: -1; }
+      .hero-circle { width: min(300px, 80%); }
+      .chip-3 { display: none; }
+
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1); }
+
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .form-card { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="4" fill="#2dbd7e"/>
+          <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#b6f0d6" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        True Care Energy
+        <span>Renewable Solutions</span>
+      </div>
+    </a>
+    <a href="#contact" class="nav-cta">Get a Free Quote</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">MCS Certified Installers</div>
+      <h1 class="hero-headline">
+        Power Your Home<br/>with <em>Clean Energy</em>
+      </h1>
+      <p class="hero-sub">
+        True Care Energy installs solar panels, battery storage, heat pumps, and EV chargers across the UK — helping families cut bills and reduce their carbon footprint.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Get a Free Survey
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#services" class="btn-secondary">
+          Our Services
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-circle">
+        <div class="hero-circle-inner">
+          <svg class="hero-sun-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="22" fill="currentColor" opacity="0.9"/>
+            <circle cx="50" cy="50" r="34" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.35"/>
+            <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="1" stroke-dasharray="3 8" opacity="0.2"/>
+            <line x1="50" y1="2" x2="50" y2="12" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="50" y1="88" x2="50" y2="98" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="2" y1="50" x2="12" y2="50" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="88" y1="50" x2="98" y2="50" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="16" y1="16" x2="23" y2="23" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="77" y1="77" x2="84" y2="84" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="84" y1="16" x2="77" y2="23" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <line x1="23" y1="77" x2="16" y2="84" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="hero-chip chip-1">
+        <div class="hero-chip-dot" style="background:#2dbd7e"></div>
+        Save up to 70% on bills
+      </div>
+      <div class="hero-chip chip-2">
+        <div class="hero-chip-dot" style="background:#f59e0b"></div>
+        0% VAT on installations
+      </div>
+      <div class="hero-chip chip-3">
+        <div class="hero-chip-dot" style="background:#3b82f6"></div>
+        10-year workmanship warranty
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><span class="stat-num">2,400+</span><span class="stat-label">Homes Installed</span></div>
+    <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Customer Satisfaction</span></div>
+    <div class="stat"><span class="stat-num">£1.2M</span><span class="stat-label">Saved on Energy Bills</span></div>
+    <div class="stat"><span class="stat-num">8,500t</span><span class="stat-label">CO₂ Avoided</span></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <p class="section-eyebrow">What We Do</p>
+    <h2 class="section-title">Complete Renewable Solutions for Your Home</h2>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5a2 2 0 014 0v2M16 7V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.4"/></svg>
+        </div>
+        <h3 class="service-name">Solar Panels</h3>
+        <p class="service-desc">Generate your own clean electricity and dramatically reduce your energy bills with our premium panel installations, tailored to your roof.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="3" width="12" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 7h4M10 11h4M10 15h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="service-name">Battery Storage</h3>
+        <p class="service-desc">Store excess solar energy and use it when you need it most — even after dark or during a power cut. Take full control of your energy.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 3v1M12 20v1M3 12H2M22 12h-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/></svg>
+        </div>
+        <h3 class="service-name">Air Source Heat Pumps</h3>
+        <p class="service-desc">Replace your gas boiler with an efficient, low-carbon heating system eligible for government grants. Warm home, lower emissions.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 18v2M16 18v2M7 12h2M15 12h2M11 10v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="service-name">EV Chargers</h3>
+        <p class="service-desc">Charge your electric vehicle at home with a smart charger, seamlessly integrated with your solar system for maximum savings.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M14 3v4a1 1 0 001 1h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" stroke="currentColor" stroke-width="1.8"/><path d="M9 9h1M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="service-name">Heat Pump Servicing</h3>
+        <p class="service-desc">Keep your heat pump running at peak efficiency with our expert maintenance and servicing plans. Protect your investment long-term.</p>
+      </div>
+
+      <div class="service-card" style="background: linear-gradient(135deg, var(--green-deep), var(--green-mid)); border-color: transparent;">
+        <div class="service-icon" style="background: rgba(255,255,255,0.12);">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.8"/><path d="M12 8v4M12 16h.01" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="service-name" style="color:white;">Something Else?</h3>
+        <p class="service-desc" style="color: rgba(255,255,255,0.7);">Not sure what you need? Get in touch and our friendly team will guide you towards the best renewable solution for your home.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+
+      <div class="contact-info">
+        <p class="section-eyebrow">Get In Touch</p>
+        <h2 class="section-title">Let's Find the Right Solution for You</h2>
+        <p>Fill in your details and one of our renewable energy specialists will be in touch within one working day — no hard sell, just honest advice.</p>
+
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3l1.5 3 3.3.5-2.4 2.3.6 3.2L12 10.5l-2.9 1.5.6-3.2L7.3 6.5l3.3-.5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="trust-text">
+            <strong>MCS Certified Installers</strong>
+            All our engineers are fully accredited. Your installation qualifies for export tariffs and government incentives.
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="trust-text">
+            <strong>10-Year Workmanship Guarantee</strong>
+            We stand behind every installation with a decade-long guarantee on all labour and workmanship.
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <div class="trust-text">
+            <strong>Free Survey & No Obligation Quote</strong>
+            We'll assess your home and give you a detailed quote — completely free and with zero pressure.
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM CARD -->
+      <div class="form-card">
+        <div id="form-content">
+          <h3 class="form-title">Request a Free Quote</h3>
+          <p class="form-sub">Takes less than 60 seconds. We'll be in touch shortly.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullname">Full Name</label>
+              <input type="text" id="fullname" name="fullname" placeholder="Jane Smith" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="telephone">Telephone</label>
+              <input type="tel" id="telephone" name="telephone" placeholder="07700 900000" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="postcode">Postcode</label>
+              <input type="text" id="postcode" name="postcode" placeholder="SW1A 1AA" autocomplete="postal-code" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0">
+            <span class="products-label">Products Interested In</span>
+            <div class="products-grid" id="products-grid">
+
+              <label class="checkbox-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="products" value="Solar" />
+                <span class="checkbox-box">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">☀️ Solar Panels</span>
+              </label>
+
+              <label class="checkbox-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="products" value="Battery" />
+                <span class="checkbox-box">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">🔋 Battery Storage</span>
+              </label>
+
+              <label class="checkbox-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="products" value="Air Source Heat Pump" />
+                <span class="checkbox-box">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">🌡️ Air Source Heat Pump</span>
+              </label>
+
+              <label class="checkbox-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="products" value="EV Charger" />
+                <span class="checkbox-box">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">⚡ EV Charger</span>
+              </label>
+
+              <label class="checkbox-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="products" value="Heat Pump Servicing" />
+                <span class="checkbox-box">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">🔧 Heat Pump Servicing</span>
+              </label>
+
+              <label class="checkbox-item" onclick="toggleCheck(this)">
+                <input type="checkbox" name="products" value="Something Else" />
+                <span class="checkbox-box">
+                  <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="checkbox-label">💬 Something Else</span>
+              </label>
+
+            </div>
+          </div>
+
+          <button class="form-submit" onclick="submitForm()">Get My Free Quote →</button>
+          <p class="form-privacy">🔒 Your details are safe with us. We'll never share your data with third parties.</p>
+        </div>
+
+        <div class="form-success" id="form-success">
+          <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Thank you!</h3>
+          <p>We've received your enquiry and a member of the True Care Energy team will be in touch within one working day.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">True Care Energy</div>
+    <p class="footer-copy">© 2025 True Care Energy Ltd. All rights reserved. MCS Certified.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleCheck(label) {
+      label.classList.toggle('checked');
+      const cb = label.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+    }
+
+    function submitForm() {
+      const name   = document.getElementById('fullname').value.trim();
+      const tel    = document.getElementById('telephone').value.trim();
+      const email  = document.getElementById('email').value.trim();
+      const post   = document.getElementById('postcode').value.trim();
+
+      if (!name || !tel || !email || !post) {
+        const fields = [
+          {el: document.getElementById('fullname'),  val: name},
+          {el: document.getElementById('telephone'), val: tel},
+          {el: document.getElementById('email'),     val: email},
+          {el: document.getElementById('postcode'),  val: post},
+        ];
+        fields.forEach(f => {
+          if (!f.val) {
+            f.el.style.borderColor = '#e53e3e';
+            f.el.addEventListener('input', () => f.el.style.borderColor = '', {once: true});
+          }
+        });
+        return;
+      }
+
+      // Show success
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('form-success').classList.add('visible');
+    }
+  </script>
+
+</body>
+</html>
