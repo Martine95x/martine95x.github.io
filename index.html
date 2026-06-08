@@ -13,7 +13,7 @@
       --green-mid:    #1a6648;
       --green-fresh:  #2dbd7e;
       --green-light:  #b6f0d6;
-      --cream:        #f5f0e8;
+      --cream:        #f5f0e8
       --sand:         #e8e0d0;
       --charcoal:     #1c1c1c;
       --white:        #ffffff;
@@ -936,8 +936,8 @@
       // Collect selected products
                 const products = Array.from(document.querySelectorAll('#products-grid input[type="checkbox"]:checked')).map(cb => cb.value);
 
-                // Send to Formspree
-                fetch('https://formspree.io/catherine@truecareenergy.co.uk', {
+                // Send to Formsubmit.co
+                fetch('https://formsubmit.co/ajax/catherine@truecareenergy.co.uk', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                               body: JSON.stringify({ name, telephone, email, postcode, products: products.join(', ') || 'None selected' })
