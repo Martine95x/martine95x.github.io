@@ -826,7 +826,7 @@
             <span class="products-label">Products Interested In</span>
             <div class="products-grid" id="products-grid">
 
-              <label class="checkbox-item" onclick="toggleCheck(this)">
+              <label class="checkbox-item" onclick="toggleCheck(event, this)">
                 <input type="checkbox" name="products" value="Solar" />
                 <span class="checkbox-box">
                   <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -834,7 +834,7 @@
                 <span class="checkbox-label">☀️ Solar Panels</span>
               </label>
 
-              <label class="checkbox-item" onclick="toggleCheck(this)">
+              <label class="checkbox-item" onclick="toggleCheck(event, this)">
                 <input type="checkbox" name="products" value="Battery" />
                 <span class="checkbox-box">
                   <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -842,7 +842,7 @@
                 <span class="checkbox-label">🔋 Battery Storage</span>
               </label>
 
-              <label class="checkbox-item" onclick="toggleCheck(this)">
+              <label class="checkbox-item" onclick="toggleCheck(event, this)">
                 <input type="checkbox" name="products" value="Air Source Heat Pump" />
                 <span class="checkbox-box">
                   <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -850,7 +850,7 @@
                 <span class="checkbox-label">🌡️ Air Source Heat Pump</span>
               </label>
 
-              <label class="checkbox-item" onclick="toggleCheck(this)">
+              <label class="checkbox-item" onclick="toggleCheck(event, this)">
                 <input type="checkbox" name="products" value="EV Charger" />
                 <span class="checkbox-box">
                   <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -858,7 +858,7 @@
                 <span class="checkbox-label">⚡ EV Charger</span>
               </label>
 
-              <label class="checkbox-item" onclick="toggleCheck(this)">
+              <label class="checkbox-item" onclick="toggleCheck(event, this)">
                 <input type="checkbox" name="products" value="Heat Pump Servicing" />
                 <span class="checkbox-box">
                   <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -866,7 +866,7 @@
                 <span class="checkbox-label">🔧 Heat Pump Servicing</span>
               </label>
 
-              <label class="checkbox-item" onclick="toggleCheck(this)">
+              <label class="checkbox-item" onclick="toggleCheck(event, this)">
                 <input type="checkbox" name="products" value="Something Else" />
                 <span class="checkbox-box">
                   <svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -905,7 +905,7 @@
   </footer>
 
   <script>
-    function toggleCheck(label) {
+    function toggleCheck(event, label) {      event.preventDefault();
       label.classList.toggle('checked');
       const cb = label.querySelector('input[type="checkbox"]');
       cb.checked = !cb.checked;
