@@ -933,10 +933,24 @@
         return;
       }
 
-      // Show success
-      document.getElementById('form-content').style.display = 'none';
-      document.getElementById('form-success').classList.add('visible');
-    }
+      // Collect selected products
+                const products = Array.from(document.querySelectorAll('#products-grid input[type="checkbox"]:checked')).map(cb => cb.value);
+
+                // Send to Formspree
+                fetch('https://formspree.io/catherine@truecareenergy.co.uk', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                              body: JSON.stringify({ name, telephone, email, postcode, products: products.join(', ') || 'None selected' })
+                }).then(res => {
+                              if (res.ok) {
+                                              document.getElementById('form-content').style.display = 'none';
+                                              document.getElementById('form-success').classList.add('visible');
+                              } else {
+                                              alert('Sorry, something went wrong. Please try again or call us directly.');
+                              }
+                }).catch(() => {
+                              alert('Sorry, something went wrong. Please try again or call us directly.');
+                });
   </script>
 
 </body>
